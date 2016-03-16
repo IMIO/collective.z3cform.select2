@@ -24,3 +24,39 @@ class TaxonomySelect2Widget(SelectWidget):
 def TaxonomySelect2FieldWidget(field, value_type, request):
     """IFieldWidget factory for SelectWidget."""
     return FieldWidget(field, TaxonomySelect2Widget(request))
+
+
+class ISingleSelect2Widget(Interface):
+    """Marker interface for single select widget"""
+
+
+class SingleSelect2Widget(SelectWidget):
+    implements(ISingleSelect2Widget, interfaces.ISelectWidget)
+    klass = u'single-select2-widget'
+
+    @property
+    def placeholder(self):
+        return self.field.placeholder
+
+    @property
+    def select2_id(self):
+        return self.id.replace('-', '_')
+
+    def items(self):
+        items = super(SingleSelect2Widget, self).items()
+        for item in items:
+            css = ''
+            css_id = item.get('value').split('_-_')
+            if len(css_id) > 3:
+                css = 'subcategory '
+                css_id = css_id[:3]
+            css = '{0}{1}'.format(css, '-'.join(css_id))
+            item['css'] = css
+        return items
+
+
+@adapter(zope.schema.interfaces.IChoice, interfaces.IFormLayer)
+@implementer(interfaces.IFieldWidget)
+def SingleSelect2FieldWidget(field, request):
+    """IFieldWidget factory for SingleSelect2Widget"""
+    return FieldWidget(field, SingleSelect2Widget(request))

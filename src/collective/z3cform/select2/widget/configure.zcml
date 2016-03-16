@@ -19,4 +19,18 @@
       template="widget_input.pt"
       />
 
+  <class class=".widget.SingleSelect2Widget">
+    <require
+        permission="zope.Public"
+        interface=".widget.ISingleSelect2Widget"
+        />
+  </class>
+
+  <z3c:widgetTemplate
+      mode="input"
+      widget=".widget.ISingleSelect2Widget"
+      layer="z3c.form.interfaces.IFormLayer"
+      template="single_select2_input.pt"
+      />
+
 </configure>
