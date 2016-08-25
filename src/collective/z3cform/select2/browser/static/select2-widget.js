@@ -1,4 +1,5 @@
-jQuery(document).ready(function($) {
+initializeSelect2Widgets = function () {
+  jQuery(function($) {
 
   var format = function(state) {
       var option = $(state.element);
@@ -19,3 +20,6 @@ jQuery(document).ready(function($) {
   });
 
 });
+};
+
+jQuery(document).ready(initializeSelect2Widgets);

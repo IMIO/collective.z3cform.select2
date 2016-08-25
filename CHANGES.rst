@@ -11,6 +11,10 @@ Changelog
 - Add a select2 single select widget
   [mpeeters]
 
+- Wrap JS select2 initialization method under name `initializeSelect2Widgets`
+  so it can be called from somewhere else if necessary (like when the select2
+  widget is displayed in an overlay)
+  [gbastien]
 
 1.1 (2016-07-07)
 ----------------
